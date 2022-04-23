@@ -96,6 +96,77 @@ app.post("/sign_up_double_fixed", (req, res) => {
 
 })
 
+app.post("/swap_1st", (req, res) => {
+    var roll1 = req.body.RollNo;
+    var roll2 = req.body.RollNo1;
+    if (roll1 === "" && roll2 === "") {
+        console.log("Enter a roll number!")
+        process.exit();
+    }
+    var query1f = { first: `${roll1}` };
+    var query1s = { second: `${roll1}` };
+    var query2f = { first: `${roll2}` };
+    var query2s = { second: `${roll2}` };
+    var new_query1f = { first: `${roll1}` };
+    var new_query1s = { second: `${roll1}` };
+    var new_query2f = { first: `${roll2}` };
+    var new_query2s = { second: `${roll2}` };
+    db.collection("Double").updateOne(query1f, { $set: new_query2f }, function (err, res) {
+        if (err) throw err;
+    })
+    db.collection("Double").updateOne(query1s, { $set: new_query2s }, function (err, res) {
+        if (err) throw err;
+    })
+    db.collection("Double").updateOne(query2f, { $set: new_query1f }, function (err, res) {
+        if (err) throw err;
+    })
+    db.collection("Double").updateOne(query2s, { $set: new_query1s }, function (err, res) {
+        if (err) throw err;
+    })
+    return res.redirect('signup_success.html')
+})
+
+app.post("/delete_single", (req, res) => {
+    var roll = req.body.RollNo;
+    if (roll === "") {
+        console.log("Enter a roll number!")
+        process.exit();
+    }
+    var query = { RollNo: `${roll}` };
+    var new_query = { RollNo: "", isAllocated: 0 };
+    db.collection("Single").updateOne(query, { $set: new_query }, function (err, res) {
+        if (err) throw err;
+        if (res.modifiedCount > 0)
+            console.log("Record deleted successfully.")
+        else
+            console.log("Record not found!")
+    })
+    return res.redirect('signup_success.html')
+})
+app.post("/delete_double", (req, res) => {
+    var roll = req.body.RollNo;
+    if (roll === "") {
+        console.log("Enter a roll number!")
+        process.exit();
+    }
+    var query = { first: `${roll}` };
+    var query2 = { second: `${roll}` };
+    var new_query = { first: "" };
+    var new_query2 = { second: "" };
+    db.collection("Double").updateOne(query, { $inc: { isAllocated: -1 }, $set: new_query }, function (err, res) {
+        if (err) throw err;
+        if (res.modifiedCount > 0) {
+            console.log("Record deleted successfully.")
+        }
+    })
+    db.collection("Double").updateOne(query2, { $inc: { isAllocated: -1 }, $set: new_query2 }, function (err, res) {
+        if (err) throw err;
+        if (res.modifiedCount > 0) {
+            console.log("Record deleted successfully.")
+        }
+    })
+    return res.redirect('signup_success.html')
+})
 
 
 var db = mongoose.connection;
