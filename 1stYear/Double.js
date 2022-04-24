@@ -4,7 +4,7 @@ var url = "mongodb://localhost:27017";
 Mongoclient.connect(url, function (err, db) {
     if (err) throw err;
     var dbo = db.db("1stYear");
-    var myobj = [
+    var DoubleObj = [
         { RoomNO: "01", Name1: "", first: "", Name2: "", second: "", isAllocated: 0 },
         { RoomNO: "02", Name1: "", first: "", Name2: "", second: "", isAllocated: 0 },
         { RoomNO: "03", Name1: "", first: "", Name2: "", second: "", isAllocated: 0 },
@@ -36,7 +36,7 @@ Mongoclient.connect(url, function (err, db) {
         { RoomNO: "29", Name1: "", first: "", Name2: "", second: "", isAllocated: 0 },
         { RoomNO: "30", Name1: "", first: "", Name2: "", second: "", isAllocated: 0 },
     ];
-    dbo.collection("Double").insertMany(myobj, function (err, res) {
+    dbo.collection("Double").insertMany(DoubleObj, function (err, res) {
         if (err) throw err;
         console.log("Records are inserted.")
         db.close;
