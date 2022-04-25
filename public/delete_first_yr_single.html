@@ -231,9 +231,8 @@
     <nav id="navbar">
         <ul>
             <li class="item"><a href="index.html">Home</a></li>
-            <li class="item"><a href="signup_success.html">Services</a></li>
-            <li class="item"><a href="#client-section">About Us</a></li>
-            <li class="item"><a href="#client-section">Contact us</a></li>
+            <li class="item"><a href="developers_page/dev.html">Developers</a></li>
+            <li class="item"><a href="contactus.html">Contact us</a></li>
         </ul>
     </nav>
     <section id="contact">
@@ -246,21 +245,26 @@
             <form action="/delete_single" method="POST">
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" placeholder="Enter your name">
+                    <input type="text" name="name" id="name" placeholder="Enter your name" required>
                 </div><br>
                 <div class="form-group">
                     <label for="RollNo">Roll No.</label>
-                    <input type="text" name="RollNo" id="email" placeholder="Enter your Roll No.">
+                    <input type="text" name="RollNo" id="email" placeholder="Enter your Roll No." required>
                 </div><br>
                 <div class="form-group">
                     <label for="RollNo">Room No.</label>
-                    <input type="number" name="RoomNo" id="RoomNo" placeholder="Enter your Room No.">
+                    <input type="number" name="RoomNo" id="RoomNo" placeholder="Enter your Room No." required>
                 </div><br>
-                
+
                 <div class="form-group">
 
-                    <button type="submit" class="btn2" value="Register">Submit</button>
+                    <button type="submit" class="btn2" value="Register" onclick="myFunction()">Submit</button>
             </form>
+            <script>
+                function myFunction() {
+                    alert("Form submitted successfully.");
+                }
+            </script>
         </div>
 </body>
 

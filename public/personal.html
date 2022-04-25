@@ -231,9 +231,8 @@
     <nav id="navbar">
         <ul>
             <li class="item"><a href="index.html">Home</a></li>
-            <li class="item"><a href="signup_success.html">Services</a></li>
-            <li class="item"><a href="#client-section">About Us</a></li>
-            <li class="item"><a href="#client-section">Contact us</a></li>
+            <li class="item"><a href="developers_page/dev.html">Developers</a></li>
+            <li class="item"><a href="contactus.html">Contact us</a></li>
         </ul>
     </nav>
     <section id="contact">
@@ -246,39 +245,44 @@
             <form action="/Personal" method="POST">
                 <div class="form-group">
                     <label for="name">Your Name:</label>
-                    <input type="text" name="name" id="name" placeholder="Enter your name">
+                    <input type="text" name="name" id="name" placeholder="Enter your name" required>
                 </div><br>
                 <div class="form-group">
                     <label for="RollNo">Your Roll No.</label>
-                    <input type="text" name="RollNo" id="RollNo" placeholder="Enter your Roll No.">
+                    <input type="text" name="RollNo" id="RollNo" placeholder="Enter your Roll No." required>
                 </div><br>
                 <div class="form-group">
                     <label for="nameF">Father's Name:</label>
-                    <input type="text" name="nameF" id="nameF" placeholder="Enter your fathers name">
+                    <input type="text" name="nameF" id="nameF" placeholder="Enter your fathers name" required>
                 </div><br>
-                
+
                 <div class="form-group">
                     <label for="nameM">Phone No.:</label>
-                    <input type="number" name="num" id="num" placeholder="Enter your phone number">
+                    <input type="number" name="num" id="num" placeholder="Enter your phone number" required>
                 </div><br>
                 <div class="form-group">
                     <label for="pnum">Parents phone No.:</label>
-                    <input type="number" name="pnum" id="pnum" placeholder="Enter your parents phone number">
+                    <input type="number" name="pnum" id="pnum" placeholder="Enter your parents phone number" required>
                 </div><br>
                 <div class="form-group">
                     <label for="emails">Your Email:</label>
-                    <input type="email" name="emails" id="emails" placeholder="Enter your email ID">
+                    <input type="email" name="emails" id="emails" placeholder="Enter your email ID" required>
                 </div><br>
-                
+
                 <div class="form-group">
                     <label for="emailp">Address :</label>
                     <textarea name="message" id="message" style="width:800px; height:80px;"></textarea>
                 </div><br>
-                
+
                 <div class="form-group">
 
-                    <button type="submit" class="btn2" value="Register">Submit</button>
+                    <button type="submit" class="btn2" value="Register" onclick="myFunction()">Submit</button>
             </form>
+            <script>
+                function myFunction() {
+                    alert("Form submitted successfully.");
+                }
+            </script>
         </div>
 </body>
 

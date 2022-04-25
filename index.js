@@ -29,7 +29,7 @@ app.post("/sign_up", (req, res) => {
         }
         console.log("rec inserted ");
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('SingleForm_1stYear.html')
 
 })
 app.post("/sign_up_double_random", (req, res) => {
@@ -42,7 +42,7 @@ app.post("/sign_up_double_random", (req, res) => {
     var query3 = { first: "", isAllocated: 0 };
     var new_query = { Name1: `${name1}`, first: `${email}`, isAllocated: 2 }
     var new_query2 = { Name2: `${name1}`, second: `${email}`, isAllocated: 2 }
-    var new_query2 = { Name1: `${name1}`, first: `${email}`, isAllocated: 1 }
+    var new_query3 = { Name1: `${name1}`, first: `${email}`, isAllocated: 1 }
     var modCount = 0;
     db.collection('Double_1stYear').updateOne(query, { $set: new_query }, (err, collection) => {
         if (err) {
@@ -61,7 +61,7 @@ app.post("/sign_up_double_random", (req, res) => {
         })
     }
     if (modCount == 0) {
-        db.collection('Double_1stYear').updateOne(query3, { $set: new_query2 }, (err, collection) => {
+        db.collection('Double_1stYear').updateOne(query3, { $set: new_query3 }, (err, collection) => {
             if (err) {
                 throw err;
             }
@@ -72,7 +72,7 @@ app.post("/sign_up_double_random", (req, res) => {
 
 
     console.log("Done ");
-    return res.redirect('signup_success.html')
+    return res.redirect('DoubleFormRandom_1stYear.html')
 
 })
 
@@ -80,7 +80,7 @@ app.post("/sign_up_double_random", (req, res) => {
 app.post("/sign_up_double_fixed", (req, res) => {
     var name1 = req.body.name;
     var email = req.body.RollNo
-    var name2 = req.body.name2;
+    var name2 = req.body.name1;
     var email1 = req.body.RollNo1;
 
     var query = { isAllocated: 0 };
@@ -92,7 +92,7 @@ app.post("/sign_up_double_fixed", (req, res) => {
         }
         console.log("rec inserted");
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('DoubleformFixed_1stYear.html')
 
 })
 
@@ -125,16 +125,17 @@ app.post("/swap_1st", (req, res) => {
     db.collection("Double_1stYear").updateOne(query2s, { $set: new_query1s }, function (err, res) {
         if (err) throw err;
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('swap_first_yr.html')
 })
 
 app.post("/delete_single", (req, res) => {
     var roll = req.body.RollNo;
+    var name = req.body.name;
     if (roll === "") {
         console.log("Enter a roll number!")
         process.exit();
     }
-    var query = { RollNo: `${roll}` };
+    var query = { RollNo: `${roll}`,Name:`${name}` };
     var new_query = { Name: "", RollNo: "", isAllocated: 0 };
     db.collection("Single_1stYear").updateOne(query, { $set: new_query }, function (err, res) {
         if (err) throw err;
@@ -143,16 +144,17 @@ app.post("/delete_single", (req, res) => {
         else
             console.log("Record not found!")
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('delete_first_yr_single.html')
 })
 app.post("/delete_double", (req, res) => {
     var roll = req.body.RollNo;
+    var name = req.body.name;
     if (roll === "") {
         console.log("Enter a roll number!")
         process.exit();
     }
-    var query = { first: `${roll}` };
-    var query2 = { second: `${roll}` };
+    var query = { first: `${roll}`,Name1:`${name}` };
+    var query2 = { second: `${roll}`,Name2:`${name}` };
     var new_query = { Name1: "", first: "" };
     var new_query2 = { Name2: "", second: "" };
     db.collection("Double_1stYear").updateOne(query, { $inc: { isAllocated: -1 }, $set: new_query }, function (err, res) {
@@ -167,7 +169,7 @@ app.post("/delete_double", (req, res) => {
             console.log("Record deleted successfully.")
         }
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('delete_first_yr_double')
 })
 app.post("/Personal", (req, res) => {
     const createCsvWriter = require('csv-writer').createObjectCsvWriter;
@@ -199,7 +201,7 @@ app.post("/Personal", (req, res) => {
         .then(() => {
             console.log("done");
         });
-    return res.redirect('signup_success.html')
+    return res.redirect('personal.html')
 })
 
 app.post("/sign_up_Seniors", (req, res) => {
@@ -214,7 +216,7 @@ app.post("/sign_up_Seniors", (req, res) => {
         }
         console.log("rec inserted ");
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('SingleForm_Seniors.html')
 
 })
 app.post("/sign_up_double_random_Seniors", (req, res) => {
@@ -227,7 +229,7 @@ app.post("/sign_up_double_random_Seniors", (req, res) => {
     var query3 = { first: "", isAllocated: 0 };
     var new_query = { Name1: `${name1}`, first: `${email}`, isAllocated: 2 }
     var new_query2 = { Name2: `${name1}`, second: `${email}`, isAllocated: 2 }
-    var new_query2 = { Name1: `${name1}`, first: `${email}`, isAllocated: 1 }
+    var new_query3 = { Name1: `${name1}`, first: `${email}`, isAllocated: 1 }
     var modCount = 0;
     db.collection('Double_Seniors').updateOne(query, { $set: new_query }, (err, collection) => {
         if (err) {
@@ -246,7 +248,7 @@ app.post("/sign_up_double_random_Seniors", (req, res) => {
         })
     }
     if (modCount == 0) {
-        db.collection('Double_Seniors').updateOne(query3, { $set: new_query2 }, (err, collection) => {
+        db.collection('Double_Seniors').updateOne(query3, { $set: new_query3 }, (err, collection) => {
             if (err) {
                 throw err;
             }
@@ -257,7 +259,7 @@ app.post("/sign_up_double_random_Seniors", (req, res) => {
 
 
     console.log("Done ");
-    return res.redirect('signup_success.html')
+    return res.redirect('DoubleformRandom_Seniors.html')
 
 })
 
@@ -265,7 +267,7 @@ app.post("/sign_up_double_random_Seniors", (req, res) => {
 app.post("/sign_up_double_fixed_Seniors", (req, res) => {
     var name1 = req.body.name;
     var email = req.body.RollNo
-    var name2 = req.body.name2;
+    var name2 = req.body.name1;
     var email1 = req.body.RollNo1;
 
     var query = { isAllocated: 0 };
@@ -277,7 +279,7 @@ app.post("/sign_up_double_fixed_Seniors", (req, res) => {
         }
         console.log("rec inserted");
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('DoubleformFixed_Seniors.html')
 
 })
 
@@ -310,16 +312,17 @@ app.post("/swap_senior", (req, res) => {
     db.collection("Double_Seniors").updateOne(query2s, { $set: new_query1s }, function (err, res) {
         if (err) throw err;
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('swap_other_yrs.html')
 })
 
 app.post("/delete_single_senior", (req, res) => {
     var roll = req.body.RollNo;
+    var name = req.body.name;
     if (roll === "") {
         console.log("Enter a roll number!")
         process.exit();
     }
-    var query = { RollNo: `${roll}` };
+    var query = { RollNo: `${roll}`,Name:`${name}` };
     var new_query = { Name: "", RollNo: "", isAllocated: 0 };
     db.collection("Single_Seniors").updateOne(query, { $set: new_query }, function (err, res) {
         if (err) throw err;
@@ -328,16 +331,17 @@ app.post("/delete_single_senior", (req, res) => {
         else
             console.log("Record not found!")
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('delete_other_single.html')
 })
 app.post("/delete_double_senior", (req, res) => {
     var roll = req.body.RollNo;
+    var name = req.body.name;
     if (roll === "") {
         console.log("Enter a roll number!")
         process.exit();
     }
-    var query = { first: `${roll}` };
-    var query2 = { second: `${roll}` };
+    var query = { first: `${roll}`,Name1:`${name}` };
+    var query2 = { second: `${roll}`,Name2:`${name}` };
     var new_query = { Name: "", first: "" };
     var new_query2 = { Name: "", second: "" };
     db.collection("Double_Seniors").updateOne(query, { $inc: { isAllocated: -1 }, $set: new_query }, function (err, res) {
@@ -352,7 +356,7 @@ app.post("/delete_double_senior", (req, res) => {
             console.log("Record deleted successfully.")
         }
     })
-    return res.redirect('signup_success.html')
+    return res.redirect('delete_other_double.html')
 })
 
 

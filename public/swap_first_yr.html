@@ -19,7 +19,7 @@
     *:after,
     *::before {
         box-sizing: border-box;
-    } 
+    }
 
     :root {
         --navbarheight: 10px;
@@ -231,9 +231,8 @@
     <nav id="navbar">
         <ul>
             <li class="item"><a href="index.html">Home</a></li>
-            <li class="item"><a href="signup_success.html">Services</a></li>
-            <li class="item"><a href="#client-section">About Us</a></li>
-            <li class="item"><a href="#client-section">Contact us</a></li>
+            <li class="item"><a href="developers_page/dev.html">Developers</a></li>
+            <li class="item"><a href="contactus.html">Contact us</a></li>
         </ul>
     </nav>
     <section id="contact">
@@ -247,34 +246,42 @@
                 <div class="divide">
                     <div class="form-group">
                         <label for="name">Name 1:</label>
-                        <input type="text" name="name" id="name" placeholder="Enter your name">
+                        <input type="text" name="name" id="name" placeholder="Enter your name" required>
                     </div><br>
                     <div class="form-group">
                         <label for="RollNo">Your Roll No.</label>
-                        <input type="text" name="RollNo" id="RollNo" placeholder="Enter your Roll No.">
+                        <input type="text" name="RollNo" id="RollNo" placeholder="Enter your Roll No." required>
                     </div><br>
                     <div class="form-group">
                         <label for="name2">Name 2:</label>
-                        <input type="text" name="name1" id="name1" placeholder="Enter name of student with whom you are swapping">
+                        <input type="text" name="name1" id="name1"
+                            placeholder="Enter name of student with whom you are swapping" required>
                     </div><br>
                     <div class="form-group">
                         <label for="RollNo2">Roll No. 2:</label>
-                        <input type="text" name="RollNo1" id="RollNo1" placeholder="Enter Roll No. of student with whom you are swapping">
+                        <input type="text" name="RollNo1" id="RollNo1"
+                            placeholder="Enter Roll No. of student with whom you are swapping" required>
                     </div><br>
                     <div class="form-group">
                         <label for="RoomNo1">Your Room No.:</label>
-                        <input type="number" name="RoomNo1" id="RoomNo1" placeholder="Enter your Room No.">
+                        <input type="number" name="RoomNo1" id="RoomNo1" placeholder="Enter your Room No."required>
                     </div><br>
                     <div class="form-group">
                         <label for="RoomNo2">Room No. 2:</label>
-                        <input type="number" name="RoomNo2" id="RoomNo2" placeholder="Enter Room No. of student with whom you are swapping">
+                        <input type="number" name="RoomNo2" id="RoomNo2"
+                            placeholder="Enter Room No. of student with whom you are swapping"required>
                     </div><br>
 
                     <div class="form-group">
 
-                        <button type="submit" class="btn2" value="Register">Submit</button>
+                        <button type="submit" class="btn2" value="Register" onclick="myFunction()">Submit</button>
                     </div>
             </form>
+            <script>
+                function myFunction() {
+                    alert("Form submitted successfully.");
+                }
+            </script>
         </div>
 </body>
 
