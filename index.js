@@ -171,20 +171,8 @@ app.post("/delete_double", (req, res) => {
     })
     return res.redirect('delete_first_yr_double')
 })
+
 app.post("/Personal", (req, res) => {
-    const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-    const csvWriter = createCsvWriter({
-        path: 'file.csv',
-        header: [
-            { id: 'name', title: 'Name' },
-            { id: 'rollNo', title: 'Roll No' },
-            { id: 'phn', title: 'Name' },
-            { id: 'nameF', title: "Father's name" },
-            { id: 'phnF', title: "Father's Phone No" },
-            { id: 'eml', title: 'Email' },
-            { id: 'adr', title: 'Address' },
-        ]
-    });
 
     var name1 = req.body.name;
     var roll = req.body.RollNo;
@@ -193,14 +181,36 @@ app.post("/Personal", (req, res) => {
     var parent = req.body.pnum;
     var email = req.body.emails;
     var address = req.body.message;
-    const records = [
-        { name: `${name1}`, rollNo: `${roll}`, phn: `${phone}`, nameF: `${father}`, phnf: `${parent}`, eml: `${email}`, adr: `${address}` }
-    ];
+    
+    const fs = require('fs');
+    const newFile = require('pdfkit');
 
-    csvWriter.writeRecords(records)
-        .then(() => {
-            console.log("done");
-        });
+    var myPDF = new newFile
+    myPDF.pipe(fs.createWriteStream('Data_' + `${roll}` + '.pdf'));
+
+    myPDF.font('Helvetica-Bold');
+    myPDF.fontSize(16);
+    myPDF.fillColor('blue');
+
+    myPDF.text("Indian Institute of Information Technology, Nagpur\n",{align: 'center'}).fillColor('red')
+    myPDF.text("Provisonal Hostel Room Allocation Letter\n\n",{align: 'center'}).fillColor('black')
+    myPDF.text("Name: "+ `${name1}` +"\n", { align: 'left' })
+    myPDF.text("Roll No: "+ `${roll}` + "\n", { align: 'left' })
+    myPDF.text("Father's name: " + `${father}` + "\n", { align: 'left' })
+    myPDF.text("Mobile No: " + `${phone}` + "\n", { align: 'left' })
+    myPDF.text("Parents Contact: " + `${parent}` + "\n", { align: 'left' })
+    myPDF.text("Email: "+`${email}` + "\n", { align: 'left' })
+    myPDF.text("Address: "+`${address}`+"\n", { align: 'left' })
+    myPDF.text("\n\nThe student with above details is provisionally allocated a hostel room in IIITN hostel.Student is required to submit the mentioned original documents to the wardon and will be responsible for the correctness of the respective documents.\n\nThis is provisional hostel room allocation letter.The hostel room will be finalized and allocated by the wardon of hostel.The decision of wardon will be final.\n\n", { align: 'left' });
+    myPDF.text("Required Documents:\n")
+    myPDF.text("1. College ID Card\n")
+    myPDF.text("2. Passport Size photos(6)\n")
+    myPDF.text("3. Aadhar Card\n\n\n\n")
+
+
+    myPDF.text("Warden's Signature:            ", { align: 'right' });
+
+    myPDF.end()
     return res.redirect('personal.html')
 })
 
